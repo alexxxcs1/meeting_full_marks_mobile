@@ -1,0 +1,42 @@
+
+.Box
+{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .ContentBox{
+        width: 100%;
+        height: calc(100% - 94px);
+    }
+    .BotNav{
+        width: 100%;
+        height: 94px;
+        // position: fixed;
+        // bottom: 0px;
+        // left: 0px;
+        background:rgba(255,255,255,1);
+        border-top: rgba($color: #707070, $alpha: 0.3) solid 1px;
+
+        .IconBox{
+            width: 42px;
+            margin: 0 101px;
+            
+            .IconImage{
+                width: 42px;
+                height: 42px;
+                margin-bottom: 7px;
+                img{
+                    display: block;
+                    width: 100%;
+                }
+            }
+            .IconText{
+                font-size:21px;
+                font-weight:300;
+                color:rgba(0,111,206,1);
+                word-break: keep-all;
+            }
+        }
+        
+    }
+}

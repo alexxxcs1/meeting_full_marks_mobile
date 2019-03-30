@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter,Route,Switch} from 'react-router-dom';
+import { HashRouter,Route,Switch,Redirect} from 'react-router-dom';
 // import style from  './App.scss';
 
 import Home from 'routes/Home'
@@ -14,6 +14,7 @@ class App extends Component {
                   
                   {/* 首页 */}
                   <Route path='/home' component={Home} />
+                  <Redirect path='/' to='/home' />
                     
               </Switch>
           </div>

@@ -1,0 +1,152 @@
+.RegisterView{
+    width: calc(100% - 120px);
+    padding: 0 60px;
+    height: 100%;
+
+    .RegisterTitle{
+        width: 100%;
+        font-size:24px;
+        font-weight:300;
+        color:rgba(0,0,0,0.7);
+        margin-top: 56px;
+    }
+    .FormBody{
+        width: 100%;
+        margin-top: 22px;
+        .FormName{
+            .NameValue{
+                font-size:36px;
+                font-weight:500;
+                color:rgba(0,111,206,1);
+                position: relative;
+                &::after{
+                    position: absolute;
+                    content: '';
+                    width: 100%;
+                    height: 14px;
+                    bottom: 0px;
+                    left: 0px;
+                    background: rgba($color: #006FCE, $alpha: 0.15);
+                }
+            }
+            
+        }
+        .FormInputGroup{
+            width: 100%;
+        }
+    }
+}
+
+.InputBox{
+    width: 100%;
+    margin: 20px 0;
+    .InputName{
+        width: 100%;
+        font-size:28px;
+        font-weight:300;
+        color:rgba(0,0,0,1);
+        margin-bottom: 19px;
+    }
+    .InputBox{
+        width: 100%;
+        height: 72px;
+        box-shadow: rgba(0,111,206,1) 0 0 0 1px inset;
+        border-radius:10px;
+        input{
+            width: 100%;
+            height: 100%;
+            font-size:24px;
+            font-weight:300;
+            background: transparent;
+            text-indent: 20px;
+            outline: none;
+        }
+    }
+    .SelectedOptionBox{
+        width: 100%;
+        height: 72px;
+        box-shadow: rgba(0,111,206,1) 0 0 0 1px inset;
+        border-radius:10px;
+        .SelectedValue{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            text-indent: 20px;
+            .PlaceHolder{
+                color: rgba($color: #000000, $alpha: 0.8);
+                font-weight:300;
+            }
+            &::after{
+                position: absolute;
+                content: '';
+                right: 25px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 0px;
+                height: 0px;
+                border-top: rgba($color: #000000, $alpha: 0.3) solid 21px;
+                border-left:  transparent solid 16px;
+                border-right:  transparent solid 16px;
+                border-bottom:  transparent solid 0px;
+                
+            }
+        }
+        .DropBox{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            background: rgba(0,0,0,0.6);
+
+            .DropOption{
+                width: 100%;
+                height: 600px;
+                background: #f1f1f1;
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+
+                .HandleButtonGroup{
+                    width: 100%;
+                    height: 80px;
+                    background: #fff;
+                    box-shadow: rgba($color: #000000, $alpha: 0.1) 0 2px 20px;
+                    .ButtonBox{
+                        width: 50%;
+                        height: 100%;
+                        .Button{
+                            width: 150px;
+                            height: 80%;
+                            margin: 0 20px;
+                            font-size:24px;
+                            background: rgba($color: #f1f1f1, $alpha: 0.8);
+                            border-radius: 10px;
+                        }
+                    }
+                }
+                .OptionBox{
+                    width: 100%;
+                    height: calc(100% - 80px);
+                    font-weight: 300;
+                    .Option{
+                        width: 100%;
+                        height: 60px;
+                        margin: 10px 0px;
+                    }
+                    .Selected{
+                        font-size: 55px;
+                    }
+                    .FirstSpare{
+                        font-size: 35px;
+                        opacity: 0.6;
+                    }
+                    .SecondSpare{
+                        font-size: 25px;
+                        opacity: 0.4;
+                    }
+                }
+            }
+        }
+    }
+}

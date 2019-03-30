@@ -6,6 +6,7 @@ import infoicon from 'assets/infoicon.png'
 import myicon from 'assets/myicon.png'
 
 import IndexView from './View/IndexView'
+import RegisterView from './View/RegisterView'
 
 export class Home extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ export class Home extends Component {
           <Switch>
             {/* 首页 */}
             <Route path='/home/index/:id' component={IndexView} />
+            <Route path='/home/register/:id' component={RegisterView} />
             
             <Redirect from="/home" to="/home/index/null" />
 

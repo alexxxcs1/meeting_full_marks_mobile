@@ -41,7 +41,7 @@ render() {
                 </div>
                 <div style={{'--themecolor':'#604494'}} className={[style.ButtonValueBox,'childcenter childcolumn childalignstart'].join(' ')}>
                     <div className={style.Value}>
-                        报名
+                        我要报名
                     </div>
                     <div className={style.Tips}>
                         参会报名点这里
@@ -54,7 +54,7 @@ render() {
                 </div>
                 <div style={{'--themecolor':'#006FCE'}} className={[style.ButtonValueBox,'childcenter childcolumn childalignstart'].join(' ')}>
                     <div className={style.Value}>
-                        报名
+                        我已报名
                     </div>
                     <div className={style.Tips}>
                         参会报名点这里

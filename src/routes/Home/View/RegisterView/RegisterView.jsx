@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import style from './RegisterView.scss';
+import {api} from 'common/app'
+
+import LocationBox from 'components/LocationBox'
     
 export class RegisterView extends Component {
 constructor(props) {
    super(props);
    this.state = {
+      meetingid:null,
+      formfield:[],
       formdata:{},
    };
    this.refreshProps = this.refreshProps.bind(this);
    this.HandleFormDataValue = this.HandleFormDataValue.bind(this);
+   this.getRegisterField = this.getRegisterField.bind(this);
+   this.createField = this.createField.bind(this);
+   this.HandleSubmit = this.HandleSubmit.bind(this);
 }
 componentWillReceiveProps(nextprops) {
    this.refreshProps(nextprops);
@@ -16,12 +24,88 @@ componentWillReceiveProps(nextprops) {
 componentDidMount() {
    this.refreshProps(this.props);
 }
-refreshProps(props) {}
+refreshProps(props) {
+   let params = props.match.params;
+   if (this.state.id != params.id) {
+     this.state.meetingid = params.id;
+     this.setState(this.state);
+     this.getRegisterField(params.id);
+   }
+}
 HandleFormDataValue(type,value){
    this.state.formdata[type] = value;
    this.setState(this.state);
 }
-
+HandleLocationPick(type,data){
+   this.state.formdata[type] = data.Province + '-' + data.City + '-' + data.Region;
+   this.setState(this.state);
+}
+getRegisterField(id){
+   api.getRegisterField(id).then(res=>{
+      if (res.code === 200) {
+         if (res.result.length === 0 ) {
+            window.history.back();
+         }
+         this.state.formfield = res.result;
+         this.setState(this.state);
+      }else{
+         alert(res.message);
+      }
+   },err=>{
+      console.log(err);
+      
+   })
+}
+createField(){
+   let result = [];
+   for (let z = 0; z < this.state.formfield.length; z++) {
+      const element = this.state.formfield[z];
+      switch (element.type) {
+         case 'input':
+            result.push(
+               <OrdinaryInputBox name={element.zh_name+(element.is_required=='1'?'*':'')} onChange={this.HandleFormDataValue.bind(this,element.en_name)}/>
+            ) 
+            break;
+         case 'select':
+         let getKeyArray=[];
+            for (const key in element.check) {
+               let check = element.check;
+               if (check.hasOwnProperty(key)) {
+               const obj = check[key];
+               getKeyArray.push({
+                  key:key,
+                  value:obj
+               })
+               }
+            }
+            result.push(
+               <SelectOptionBox  name={element.zh_name+(element.is_required=='1'?'*':'')} Option={getKeyArray} onChange={this.HandleFormDataValue.bind(this,element.en_name)}/>
+            )
+            break;
+         case 'location':
+            result.push(
+               <LocaltionBox name={element.zh_name+(element.is_required=='1'?'*':'')} placeholder={' '} value={this.state.formdata.localtion} onChange={this.HandleLocationPick.bind(this,element.en_name)}/>
+            );
+            break
+         default:
+            break;
+      }
+   }
+   return result;
+}
+HandleSubmit(){
+   
+   api.ApplyRegister(this.state.meetingid,this.state.formdata).then(res=>{
+      console.log(res);
+      if (res.code === 200) {
+         
+      }
+      alert(res.message);
+   },err=>{
+      console.log(err);
+      
+   })
+}
 render() {
    return (
    <div className={[style.RegisterView,'childcenter childcolumn childcontentstart'].join(' ')}>
@@ -35,8 +119,12 @@ render() {
             </div>
          </div>
          <div className={style.FormInputGroup}>
-            <OrdinaryInputBox name={'姓名'} placeholder={'请输入您的姓名'} value={this.state.formdata.name} onChange={this.HandleFormDataValue.bind(this,'name')}/>
-            <SelectOptionBox  name={'性别'} placeholder={'请选择你的性别'} Option={[{key:'男',value:'男'},{key:'女',value:'女'},{key:'未知',value:'未知'}]} Selected={this.state.formdata.sex} onChange={this.HandleFormDataValue.bind(this,'sex')}/>
+            {this.createField()}
+         </div>
+         <div className={[style.SubmitGroup,'childcenter'].join(' ')}>
+            <div className={[style.Button,'childcenter'].join(' ')} onClick={this.HandleSubmit}>
+               报名
+            </div>
          </div>
        </div>
    </div>
@@ -112,6 +200,8 @@ class SelectOptionBox extends Component{
    HandleSelect(){
       this.state.SelectValue = this.state.SelectIndex;
       this.state.Drop = false;
+      this.props.onChange(this.state.Option[this.state.SelectValue].value)
+      
       this.setState(this.state);
    }
    createOption(){
@@ -137,7 +227,7 @@ class SelectOptionBox extends Component{
       }
       let morebeforeOption;
       if (this.state.SelectIndex-2<0) {
-         morebeforeOption = <div className={[style.Option,style.SecondSpare,'childcenter'].join(' ')}>{this.state.Option[(this.state.Option.length) - Math.abs(this.state.SelectIndex-2)].value}</div>;
+         morebeforeOption = <div className={[style.Option,style.SecondSpare,'childcenter'].join(' ')}>{this.state.Option[((this.state.Option.length) - Math.abs(this.state.SelectIndex-2))%(this.state.Option.length)].value}</div>;
       }else{
          morebeforeOption = <div className={[style.Option,style.SecondSpare,'childcenter'].join(' ')}>{this.state.Option[this.state.SelectIndex - 2].value}</div>;
       }
@@ -211,6 +301,37 @@ class SelectOptionBox extends Component{
                      </div>
                   </div>
                </div>:''}
+            </div>
+         </div>
+      )
+   }
+}
+
+class LocaltionBox extends Component{
+   constructor(props){
+      super(props);
+      this.state = {};
+      this.CompileValue = this.CompileValue.bind(this);
+   }
+   CompileValue(){
+      if (!this.props.value) {
+         return null;
+      }
+      let valuearray =  this.props.value.split('-');
+      return {
+         Province:valuearray[0],
+         City:valuearray[1],
+         Region:valuearray[2]
+      }
+   }
+   render(){
+      return (
+         <div className={style.InputBox}>
+            <div className={style.InputName}>
+               <span>{this.props.name}</span>
+            </div>
+            <div className={style.LocaltionInput} >
+               <LocationBox placeholder={this.props.placeholder} value={this.CompileValue()} onChange={this.props.onChange}/>
             </div>
          </div>
       )

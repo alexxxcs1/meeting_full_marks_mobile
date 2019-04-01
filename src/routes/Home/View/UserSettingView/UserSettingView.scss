@@ -1,49 +1,29 @@
-.RegisterView{
-    width: calc(100% - 120px);
-    padding: 0 60px;
+.UserSettingView{
+    width: 100%;
     height: 100%;
-    overflow: auto;
-    .RegisterTitle{
-        width: 100%;
-        font-size:24px;
-        font-weight:300;
-        color:rgba(0,0,0,0.7);
-        margin-top: 56px;
-    }
+    background: #F5F5F5;
     .FormBody{
-        width: 100%;
-        margin-top: 22px;
-        .FormName{
-            .NameValue{
-                font-size:36px;
-                font-weight:500;
-                color:rgba(0,111,206,1);
-                position: relative;
-                &::after{
-                    position: absolute;
-                    content: '';
-                    width: 100%;
-                    height: 14px;
-                    bottom: 0px;
-                    left: 0px;
-                    background: rgba($color: #006FCE, $alpha: 0.15);
-                }
+        width: calc(100% - 90px);
+        padding: 0 45px;
+        padding-top: 10px;
+        background: #fff;
+
+        .InputRowBox{
+            width: 100%;
+            height: 90px;
+            border-bottom:1px solid rgba(112,112,112,0.2);
+
+            .InputName{
+                width: 198px;
+                height: 100%;
+                text-indent: 26px;
+                font-size:24px;
+                font-weight:300;
+                color:rgba(0,0,0,1);
             }
-            
-        }
-        .FormInputGroup{
-            width: 100%;
-        }
-        .SubmitGroup{
-            width: 100%;
-            margin-top: 40px;
-            .Button{
-                width: 200px;
-                height: 60px;
-                background: #006FCE;
-                border-radius: 15px;
-                color: #fff;
-                font-size: 30px;
+            .InputBox{
+                width: calc(100% - 198px);
+                height: 100%;
             }
         }
     }

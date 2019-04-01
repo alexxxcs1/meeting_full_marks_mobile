@@ -1,0 +1,97 @@
+.LocationBox{
+    width: 100%;
+    height: 100%;
+
+    .LocationValue{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        text-indent: 20px;
+        font-weight:300;
+        font-size:24px;
+        &::after{
+            position: absolute;
+            content: '';
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0px;
+            height: 0px;
+            border-top: rgba($color: #000000, $alpha: 0.3) solid 21px;
+            border-left:  transparent solid 16px;
+            border-right:  transparent solid 16px;
+            border-bottom:  transparent solid 0px;
+            
+        }
+    }
+
+    .DropBox{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 999;
+        top: 0px;
+        left: 0px;
+        background: rgba(0,0,0,0.6);
+    }
+    .DropOption{
+        width: 100%;
+        height: 600px;
+        background: #f1f1f1;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+
+        .HandleButtonGroup{
+            width: 100%;
+            height: 80px;
+            background: #fff;
+            box-shadow: rgba($color: #000000, $alpha: 0.1) 0 2px 20px;
+            .ButtonBox{
+                width: 50%;
+                height: 100%;
+                .Button{
+                    width: 150px;
+                    height: 80%;
+                    margin: 0 20px;
+                    font-size:24px;
+                    background: rgba($color: #f1f1f1, $alpha: 0.8);
+                    border-radius: 10px;
+                }
+            }
+        }
+        .OptionBox{
+            width: 100%;
+            height: calc(100% - 80px);
+            font-weight: 300;
+
+            .OptionColumn{
+                width: 33%;
+                height: 100%;
+                box-shadow: rgba($color: #000000, $alpha: 0.05) 0 0 5px;
+                .Option{
+                    width: 100%;
+                    height: 60px;
+                    margin: 10px 0px;
+                }
+                .Selected{
+                    font-size: 40px;
+                }
+                .FirstSpare{
+                    font-size: 30px;
+                    opacity: 0.6;
+                }
+                .SecondSpare{
+                    font-size: 20px;
+                    opacity: 0.4;
+                }
+            }
+            
+        }
+    }
+}
+
+.PlaceHolder{
+    color: rgba($color: #000000, $alpha: 0.8);
+    font-weight:300;
+}

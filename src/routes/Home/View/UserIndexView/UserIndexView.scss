@@ -1,0 +1,132 @@
+.UserIndexView {
+    width: 100%;
+    height: 100%;
+
+    .HnadleGroup {
+        width: calc(100% - 78px);
+        height: 90px;
+        padding: 0 39px;
+
+        .ColumnBox {
+            width: 50%;
+            height: 100%;
+
+            .SettingBox {
+                width: 38px;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .PayStatusButton {
+                width: 122px;
+                height: 48px;
+                box-shadow: rgba(246, 121, 53, 1) 0 0 0 1px inset;
+                border-radius: 27px;
+                font-size: 24px;
+                font-weight: 400;
+                color: rgba(235, 104, 47, 1);
+            }
+        }
+    }
+
+    .UserInfo {
+        width: 672px;
+        height: 782px;
+        margin: 60px auto;
+        position: relative;
+        position: relative;
+
+        // .FrontSilk {
+        //     pointer-events: none;
+        //     position: absolute;
+        //     top: 0%;
+        //     left: 50%;
+        //     transform: skew(25deg) translateX(-50%) translateY(calc(-100% + 35px));
+        //     width: 90px;
+        //     height: 137px;
+        //     background: linear-gradient(323deg, rgba(160, 99, 0, 1) 0%, rgba(222, 174, 43, 1) 80%, rgba(160, 99, 0, 1));
+        //     z-index: 2;
+
+        //     &::before {
+        //         content: '';
+        //         position: absolute;
+        //         bottom: 0px;
+        //         left: 50%;
+        //         transform: translateX(-50%);
+        //         width: 127px;
+        //         height: 22px;
+        //         background: rgba(160, 99, 0, 1);
+        //         border-radius: 11px;
+        //     }
+        // }
+
+        // .BackSilk {
+        //     pointer-events: none;
+        //     position: absolute;
+        //     top: 0%;
+        //     left: 50%;
+        //     transform: scaleX(-1) skew(25deg) translateX(50%) translateY(calc(-100% + 35px));
+        //     width: 90px;
+        //     height: 137px;
+        //     background: linear-gradient(323deg, rgba(160, 99, 0, 1) 0%, rgba(222, 174, 43, 1) 80%, rgba(160, 99, 0, 1));
+        //     z-index: 0;
+
+        //     &::before {
+        //         content: '';
+        //         position: absolute;
+        //         bottom: 0px;
+        //         left: 50%;
+        //         transform: translateX(-50%);
+        //         width: 127px;
+        //         height: 22px;
+        //         background: rgba(160, 99, 0, 1);
+        //         border-radius: 11px;
+        //     }
+        // }
+
+        .UserInfoDetail {
+            width: 100%;
+            height: 100%;
+            background: rgba(244, 244, 244, 1);
+            box-shadow: rgba(160, 99, 0, 1) 0 0 0 1px inset;
+            border-radius: 20px;
+            position: relative;
+            z-index: 1;
+
+            .MeetingTitle{
+                width: 584px;
+                font-size:34px;
+                font-weight:400;
+                color:rgba(0,0,0,0.75);
+            }
+
+            .QRbox{
+                width: 447px;
+                height: 461px;
+                background: #fff;
+                margin: 28px 0;
+                .UserName{
+                    font-size:48px;
+                    font-weight:500;
+                    color:rgba(0,0,0,1);
+                }
+                .UserQRCode{
+                    width: 250px;
+                    height: 250px;
+                    margin: 28px 0;
+                    img{
+                        width: 100%;
+                    }
+                }
+            }
+            .Tips{
+                width: 100%;
+                font-size:26px;
+                font-weight:300;
+                color:rgba(160,99,0,1);
+            }
+        }
+    }
+}

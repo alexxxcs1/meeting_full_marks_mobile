@@ -7,6 +7,9 @@ import myicon from 'assets/myicon.png'
 
 import IndexView from './View/IndexView'
 import RegisterView from './View/RegisterView'
+import MeetingView from './View/MeetingView'
+import UserIndexView from './View/UserIndexView'
+import UserSettingView from './View/UserSettingView'
 
 export class Home extends Component {
   constructor(props) {
@@ -14,11 +17,19 @@ export class Home extends Component {
     this.state = {
       
     };
+    this.refreshProp = this.refreshProp.bind(this);
   }
-  componentDidMount()
-  {
+  componentDidMount(){
+    this.refreshProp(this.props);
   }
   componentWillReceiveProps(nextprops){
+    this.refreshProp(nextprops);    
+  }
+  refreshProp(props){
+    let hash = window.location.hash;
+    let hasharray = hash.split('/');
+    this.state.meetingid = hasharray[hasharray.length-1];
+    this.setState(this.state);
   }
   render() {
     return (
@@ -28,6 +39,9 @@ export class Home extends Component {
             {/* 首页 */}
             <Route path='/home/index/:id' component={IndexView} />
             <Route path='/home/register/:id' component={RegisterView} />
+            <Route path='/home/meeting/:id' component={MeetingView} />
+            <Route path='/home/user/:id' component={UserIndexView} />
+            <Route path='/home/setting/:id' component={UserSettingView} />
             
             <Redirect from="/home" to="/home/index/null" />
 
@@ -35,7 +49,7 @@ export class Home extends Component {
         </div>
         <div className={[style.BotNav,'childcenter'].join(' ')}>
 
-          <div className={[style.IconBox,'childcenter childcolumn'].join(' ')}>
+          <div className={[style.IconBox,'childcenter childcolumn'].join(' ')} onClick={()=>{window.location.hash='#/home/index/'+this.state.meetingid}}>
             <div className={style.IconImage}>
               <img src={homeicon} alt=""/>
             </div>
@@ -43,7 +57,7 @@ export class Home extends Component {
               <p>首页</p>
             </div>
           </div>
-          <div className={[style.IconBox,'childcenter childcolumn'].join(' ')}>
+          <div className={[style.IconBox,'childcenter childcolumn'].join(' ')} onClick={()=>{window.location.hash='#/home/meeting/'+this.state.meetingid}}>
             <div className={style.IconImage}>
               <img src={infoicon} alt=""/>
             </div>
@@ -51,7 +65,7 @@ export class Home extends Component {
               <p>大会信息</p>
             </div>
           </div>
-          <div className={[style.IconBox,'childcenter childcolumn'].join(' ')}>
+          <div className={[style.IconBox,'childcenter childcolumn'].join(' ')} onClick={()=>{window.location.hash='#/home/user/'+this.state.meetingid}}>
             <div className={style.IconImage}>
               <img src={myicon} alt=""/>
             </div>

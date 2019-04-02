@@ -5,7 +5,7 @@ import AskPost from './AskPost'
 let cm = 'http://192.168.1.153/huibaifen/public/index.php/'
 let ol = 'http://www.huibaifen.com/index.php/'
 
-const host = cm;
+const host = ol;
 
 // 实例化 ajax请求对象
 const ajaxinstance = axios.create({

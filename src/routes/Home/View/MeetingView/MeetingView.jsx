@@ -28,7 +28,7 @@ componentDidMount() {
 }
 refreshProps(props) {
     let params = props.match.params;
-    if (this.state.id != params.id) {
+    if (this.state.meetingid != params.id) {
       this.state.meetingid = params.id;
       this.setState(this.state);
       this.getMeetingInfo(params.id);

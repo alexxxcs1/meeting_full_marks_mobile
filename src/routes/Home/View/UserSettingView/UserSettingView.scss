@@ -4,46 +4,33 @@
     background: #F5F5F5;
     .FormBody{
         width: calc(100% - 90px);
-        padding: 0 45px;
-        padding-top: 10px;
+        padding: 10px 45px;
         background: #fff;
-
-        .InputRowBox{
-            width: 100%;
-            height: 90px;
-            border-bottom:1px solid rgba(112,112,112,0.2);
-
-            .InputName{
-                width: 198px;
-                height: 100%;
-                text-indent: 26px;
-                font-size:24px;
-                font-weight:300;
-                color:rgba(0,0,0,1);
-            }
-            .InputBox{
-                width: calc(100% - 198px);
-                height: 100%;
-            }
-        }
     }
 }
 
-.InputBox{
+.InputRowBox{
     width: 100%;
+    height: 90px;
     margin: 20px 0;
+    border-bottom: 2px solid rgba(112,112,112,0.2);
     .InputName{
-        width: 100%;
-        font-size:28px;
+        width: 198px;
+        height: 100%;
+        text-indent: 26px;
+        font-size:24px;
         font-weight:300;
         color:rgba(0,0,0,1);
-        margin-bottom: 19px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        
     }
     .InputBox{
-        width: 100%;
+        width: calc(100% - 198px);
         height: 72px;
-        box-shadow: rgba(0,111,206,1) 0 0 0 1px inset;
-        border-radius:10px;
+        // box-shadow: rgba(0,111,206,1) 0 0 0 1px inset;
+        // border-radius:10px;
         input{
             width: 100%;
             height: 100%;
@@ -56,16 +43,16 @@
         }
     }
     .LocaltionInput{
-        width: 100%;
+        width: calc(100% - 198px);
         height: 72px;
-        box-shadow: rgba(0,111,206,1) 0 0 0 1px inset;
-        border-radius:10px;
+        // box-shadow: rgba(0,111,206,1) 0 0 0 1px inset;
+        // border-radius:10px;
     }
     .SelectedOptionBox{
-        width: 100%;
+        width: calc(100% - 198px);
         height: 72px;
-        box-shadow: rgba(0,111,206,1) 0 0 0 1px inset;
-        border-radius:10px;
+        // box-shadow: rgba(0,111,206,1) 0 0 0 1px inset;
+        // border-radius:10px;
         .SelectedValue{
             width: 100%;
             height: 100%;
@@ -150,5 +137,35 @@
                 }
             }
         }
+    }
+}
+
+.HandleUpdate{
+    width: 100%;
+    // height: 72px;
+    margin: 42px 0;
+
+    .ConfirmButton{
+        width:139px;
+        height:69px;
+        background:rgba(0,111,206,1);
+        border-radius:35px;
+        color: #fff;
+        font-size:16px;
+        font-weight:400;
+        color:rgba(255,255,255,1);
+        margin: 0 13px;
+        cursor: pointer;
+    }
+    .CancelButton{
+        width:139px;
+        height:69px;
+        border:1px solid rgba(212,212,212,1);
+        border-radius:35px;
+        font-size:16px;
+        font-weight:300;
+        color:rgba(0,0,0,0.5);
+        margin: 0 13px;
+        cursor: pointer;
     }
 }

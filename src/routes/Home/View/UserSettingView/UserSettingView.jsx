@@ -10,13 +10,16 @@ constructor(props) {
   this.state = {
     meetingid:null,
     formfield:[],
+    _formdata:{},
     formdata:{},
+    isReadOnly:true,
   };
   this.refreshProps = this.refreshProps.bind(this);
   this.getUserInfo = this.getUserInfo.bind(this);
   this.createField = this.createField.bind(this);
   this.HandleFormDataValue = this.HandleFormDataValue.bind(this);
   this.HandleLocationPick = this.HandleLocationPick.bind(this);
+  this.updateUserInfo = this.updateUserInfo.bind(this);
 }
 componentWillReceiveProps(nextprops) {
   this.refreshProps(nextprops);
@@ -26,7 +29,7 @@ componentDidMount() {
 }
 refreshProps(props) {
     let params = props.match.params;
-    if (this.state.id != params.id) {
+    if (this.state.meetingid != params.id) {
       this.state.meetingid = params.id;
       this.setState(this.state);
       this.getUserInfo(params.id);
@@ -61,7 +64,7 @@ createField(){
        switch (element.type) {
           case 'input':
              result.push(
-                <OrdinaryInputBox value={this.state.formdata[element.en_name]} name={element.zh_name+(element.is_required=='1'?'*':'')} onChange={this.HandleFormDataValue.bind(this,element.en_name)}/>
+                <OrdinaryInputBox readonly={element.en_name == 'mobile'?true:this.state.isReadOnly} value={this.state.formdata[element.en_name]} name={element.zh_name+(element.is_required=='1'?'*':'')} onChange={this.HandleFormDataValue.bind(this,element.en_name)}/>
              ) 
              break;
           case 'select':
@@ -83,15 +86,13 @@ createField(){
                     index++;
                 }
              }
-             console.log(selectedIndex);
-             
              result.push(
-                <SelectOptionBox  Selected={selectedIndex} name={element.zh_name+(element.is_required=='1'?'*':'')} Option={getKeyArray} onChange={this.HandleFormDataValue.bind(this,element.en_name)}/>
+                <SelectOptionBox readonly={element.en_name == 'mobile'?true:this.state.isReadOnly}  Selected={selectedIndex} name={element.zh_name+(element.is_required=='1'?'*':'')} Option={getKeyArray} onChange={this.HandleFormDataValue.bind(this,element.en_name)}/>
              )
              break;
           case 'location':
              result.push(
-                <LocaltionBox value={this.state.formdata[element.en_name]} name={element.zh_name+(element.is_required=='1'?'*':'')} placeholder={' '} onChange={this.HandleLocationPick.bind(this,element.en_name)}/>
+                <LocaltionBox readonly={element.en_name == 'mobile'?true:this.state.isReadOnly} value={this.state.formdata[element.en_name]} name={element.zh_name+(element.is_required=='1'?'*':'')} placeholder={' '} onChange={this.HandleLocationPick.bind(this,element.en_name)}/>
              );
              break
           default:
@@ -100,11 +101,55 @@ createField(){
     }
     return result;
  }
+updateUserInfo(){
+   console.log(this.state);
+   let option={};
+   for (let z = 0; z < this.state.formfield.length; z++) {
+      const element = this.state.formfield[z];
+      option[element.en_name] = this.state.formdata[element.en_name];
+   }
+   api.updateUserInfo(this.state.meetingid,option,this.state.formdata.uid).then(res=>{
+      console.log(res);
+      if (res.code === 200) {
+         this.setState({
+            isReadOnly:true,
+         })
+      }else{
+
+      }
+      alert(res.message)
+   },err=>{
+      console.log(err);
+      
+   })
+}
 render() {
   return (
     <div className={style.UserSettingView}>
         <div className={style.FormBody}>
             {this.createField()}
+        </div>
+        <div className={[style.HandleUpdate,'childcenter'].join(' ')}>
+            {this.state.isReadOnly&&Object.keys(this.state.formdata).length?<div className={[style.ConfirmButton,'childcenter'].join(' ')} onClick={(()=>{
+               this.setState({
+                  _formdata:JSON.parse(JSON.stringify(this.state.formdata)),
+                  isReadOnly:false,
+               })
+            }).bind(this)}>
+                编辑
+            </div>:''}
+            {this.state.isReadOnly?'':[<div className={[style.ConfirmButton,'childcenter'].join(' ')} onClick={this.updateUserInfo}>
+                更新
+            </div>,
+            <div className={[style.CancelButton,'childcenter'].join(' ')} onClick={(()=>{
+               this.setState({
+                  formdata:JSON.parse(JSON.stringify(this.state._formdata)),
+                  _formdata:{},
+                  isReadOnly:true,
+               })
+            }).bind(this)}>
+                取消
+            </div>]}
         </div>
     </div>
    )
@@ -135,12 +180,12 @@ class OrdinaryInputBox extends Component{
     }
     render(){
        return (
-          <div className={style.InputBox}>
+          <div className={[style.InputRowBox,'childcenter'].join(' ')}>
              <div className={style.InputName}>
                 <span>{this.props.name}</span>
              </div>
              <div className={style.InputBox} >
-                <input type="text" placeholder={this.props.placeholder} value={this.props.value} onChange={this.HandleInputValue}/>
+                <input readOnly={this.props.readonly} type="text" placeholder={this.props.placeholder} value={this.props.value} onChange={this.HandleInputValue}/>
              </div>
           </div>
        )
@@ -254,12 +299,12 @@ class OrdinaryInputBox extends Component{
     }
     render(){
        return (
-          <div className={style.InputBox}>
+          <div className={[style.InputRowBox,'childcenter'].join(' ')}>
              <div className={style.InputName}>
                 <span>{this.props.name}</span>
              </div>
              <div className={style.SelectedOptionBox} >
-                <div className={[style.SelectedValue,'childcenter childcontentstart'].join(' ')} onClick={this.HandleDrop.bind(this,true)}>
+                <div className={[style.SelectedValue,'childcenter childcontentstart'].join(' ')} onClick={this.props.readonly?()=>{}:this.HandleDrop.bind(this,true)}>
                    {this.state.SelectValue!=null?this.state.Option[this.state.SelectValue].value: <span className={style.PlaceHolder}>{this.props.placeholder}</span> }
                 </div>
                 {this.state.Option.length !== 0&&this.state.Drop?<div className={style.DropBox}>
@@ -305,12 +350,12 @@ class OrdinaryInputBox extends Component{
     }
     render(){
        return (
-          <div className={style.InputBox}>
+          <div className={[style.InputRowBox,'childcenter'].join(' ')}>
              <div className={style.InputName}>
                 <span>{this.props.name}</span>
              </div>
              <div className={style.LocaltionInput} >
-                <LocationBox placeholder={this.props.placeholder} value={this.CompileValue()} onChange={this.props.onChange}/>
+                <LocationBox readOnly={this.props.readonly} placeholder={this.props.placeholder} value={this.CompileValue()} onChange={this.props.onChange}/>
              </div>
           </div>
        )

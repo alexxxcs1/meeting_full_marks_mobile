@@ -8,7 +8,9 @@ import qricon from 'assets/qricon.png'
 export class UserIndexView extends Component {
 constructor(props) {
   super(props);
-  this.state = {};
+  this.state = {
+    meetingid:null
+  };
      this.refreshProps = this.refreshProps.bind(this);
 }
 componentWillReceiveProps(nextprops) {
@@ -18,14 +20,18 @@ componentDidMount() {
   this.refreshProps(this.props);
 }
 refreshProps(props) {
-  
+    let params = props.match.params;
+    if (this.state.meetingid != params.id) {
+      this.state.meetingid = params.id;
+      this.setState(this.state);
+    }
 }
 render() {
   return (
     <div className={style.UserIndexView}>
         <div className={[style.HnadleGroup,'childcenter'].join(' ')}>
             <div className={[style.ColumnBox,'childcenter childcontentstart'].join(' ')}>
-                <div className={style.SettingBox}>
+                <div className={style.SettingBox} onClick={()=>{window.location.hash = '#/home/setting/'+this.state.meetingid}}>
                     <img src={settingicon} alt=""/>
                 </div>
             </div>

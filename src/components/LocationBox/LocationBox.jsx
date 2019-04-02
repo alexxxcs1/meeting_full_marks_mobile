@@ -44,8 +44,9 @@ refreshProps(props) {
       this.state.ProvinceSelected_Value = props.value.Province;
       this.state.CitySelected_Value = props.value.City;
       this.state.RegionSelected_Value = props.value.Region;
-      this.setState(this.state);
   }
+  this.state.readonly = props.readOnly;
+  this.setState(this.state);
 }
 getProvince(){
     let ProvinceArray=[];
@@ -250,7 +251,7 @@ HandleSelect(){
 render() {
   return (
     <div className={style.LocationBox}>
-        <div className={[style.LocationValue,'childcenter childcontentstart'].join(' ')} onClick={this.HandleDrop.bind(this,true)}>
+        <div className={[style.LocationValue,'childcenter childcontentstart'].join(' ')} onClick={this.state.readonly?()=>{}:this.HandleDrop.bind(this,true)}>
             {this.state.ProvinceSelected_Value?this.state.ProvinceSelected_Value+'-'+this.state.CitySelected_Value+'-'+this.state.RegionSelected_Value:<span className={style.PlaceHolder}>{(this.props.placeholder?this.props.placeholder:'请选择所在省市区')}</span>}
         </div>
         {this.state.Drop?<div className={style.DropBox}>

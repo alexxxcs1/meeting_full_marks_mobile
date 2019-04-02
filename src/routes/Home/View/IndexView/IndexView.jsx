@@ -23,7 +23,7 @@ componentDidMount() {
 }
 refreshProps(props) {
     let params = props.match.params;
-    if (this.state.id != params.id) {
+    if (this.state.meetingid != params.id) {
       this.state.meetingid = params.id;
       this.setState(this.state);
       this.getIndexInfo(params.id);
@@ -75,7 +75,7 @@ render() {
                     </div>
                 </div>
             </div>
-            <div className={[style.ButtonBox,'childcenter'].join(' ')} onClick={()=>{window.location.hash = '#/home/register/'+this.state.meetinginfo.id}}>
+            <div className={[style.ButtonBox,'childcenter'].join(' ')} onClick={()=>{window.location.hash = '#/home/bindwx/'+this.state.meetinginfo.id}}>
                 <div className={[style.IconBox,style.blue,'childcenter'].join(' ')}>
                     <img src={qricon} alt=""/>
                 </div>

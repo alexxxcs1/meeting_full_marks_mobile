@@ -31,6 +31,25 @@ const AskPost = (ajaxinstance) => {
         meetid
       }));
     }
+    //获取用户信息
+    customer.updateUserInfo = (meetid,option,uid) => {
+      return ajaxinstance.post('index/users/update',qs.stringify({
+        meetid,...option,uid
+      }));
+    }
+    //获取绑定用户验证码
+    customer.getRegisterCode = (meetid,mobile) => {
+      return ajaxinstance.post('index/users/getCode',qs.stringify({
+        meetid,mobile
+      }));
+    }
+    //获取绑定用户验证码
+    customer.BindWechat = (meetid,mobile,code) => {
+      return ajaxinstance.post('index/users/bindMeeting',qs.stringify({
+        meetid,mobile,code
+      }));
+    }
+    
     
     return customer
   }

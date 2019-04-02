@@ -10,6 +10,7 @@ import RegisterView from './View/RegisterView'
 import MeetingView from './View/MeetingView'
 import UserIndexView from './View/UserIndexView'
 import UserSettingView from './View/UserSettingView'
+import BindWechatView from './View/BindWechatView'
 
 export class Home extends Component {
   constructor(props) {
@@ -42,6 +43,7 @@ export class Home extends Component {
             <Route path='/home/meeting/:id' component={MeetingView} />
             <Route path='/home/user/:id' component={UserIndexView} />
             <Route path='/home/setting/:id' component={UserSettingView} />
+            <Route path='/home/bindwx/:id' component={BindWechatView} />
             
             <Redirect from="/home" to="/home/index/null" />
 

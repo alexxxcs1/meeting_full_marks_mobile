@@ -11,6 +11,7 @@ import MeetingView from './View/MeetingView'
 import UserIndexView from './View/UserIndexView'
 import UserSettingView from './View/UserSettingView'
 import BindWechatView from './View/BindWechatView'
+import PayWayView from './View/PayWayView'
 
 export class Home extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ export class Home extends Component {
             <Route path='/home/user/:id' component={UserIndexView} />
             <Route path='/home/setting/:id' component={UserSettingView} />
             <Route path='/home/bindwx/:id' component={BindWechatView} />
+            <Route path='/home/pay/:id' component={PayWayView} />
             
             <Redirect from="/home" to="/home/index/null" />
 

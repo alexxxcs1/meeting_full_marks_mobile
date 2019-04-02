@@ -111,7 +111,7 @@ export class RegisterView extends Component {
          <div className={[style.RegisterView, 'childcenter childcolumn childcontentstart'].join(' ')}>
             <div className={style.RegisterTitle}>
                请务必填写有效信息，以保证注册确认函和其他会议信息的有效传达，感谢您的耐心填写
-       </div>
+            </div>
             <div className={style.FormBody}>
                <div className={[style.FormName, 'childcenter childalignstart childcolumn'].join(' ')}>
                   <div className={style.NameValue}>

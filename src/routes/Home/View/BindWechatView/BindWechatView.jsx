@@ -93,7 +93,7 @@ render() {
         </div>
         <div className={style.FormBody}>
            <div className={[style.FormName, 'childcenter childalignstart childcolumn'].join(' ')}>
-              <div className={style.NameValue}>
+            <div className={style.NameValue}>
                  一步完成注册
             </div>
             <div className={style.InputBox}>

@@ -35,8 +35,6 @@ getIndexInfo(id){
         if (res.code === 200) {
             this.state.meetinginfo = res.result;
             this.setState(this.state);
-        }else{
-            alert(res.message);
         }
     },err=>{
         console.log(err);

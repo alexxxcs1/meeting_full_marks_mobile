@@ -49,6 +49,12 @@ const AskPost = (ajaxinstance) => {
         meetid,mobile,code
       }));
     }
+    //获取微信授权地址
+    customer.getWxAuth = (url) => {
+      return ajaxinstance.post('index/weixin/authurl',qs.stringify({
+        url
+      }));
+    }
     
     
     return customer

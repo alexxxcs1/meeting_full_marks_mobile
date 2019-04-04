@@ -15,7 +15,8 @@ const ajaxinstance = axios.create({
   headers: {
     // responseType: 'JSON',
     // 'Content-Type': 'application/json'
-  }
+  },
+  withCredentials:true,
 })
 
 // 添加拦截器，处理 公用请求参数，和通用请求头部

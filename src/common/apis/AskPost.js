@@ -55,6 +55,25 @@ const AskPost = (ajaxinstance) => {
         url
       }));
     }
+    //获取会收费金额及用户付费情况
+    customer.getMeetingPay = (meetid) => {
+      return ajaxinstance.post('index/Wxpay/natvie',qs.stringify({
+        meetid
+      }));
+    }
+    //获取微信支付配置
+    customer.getWxPayConfig = (meetid) => {
+      return ajaxinstance.post('index/Wxpay/index',qs.stringify({
+        meetid
+      }));
+    }
+    //获取个人中心信息
+    customer.getUserInfoIndex = (meetid) => {
+      return ajaxinstance.post('index/users/index',qs.stringify({
+        meetid
+      }));
+    }
+    
     
     
     return customer

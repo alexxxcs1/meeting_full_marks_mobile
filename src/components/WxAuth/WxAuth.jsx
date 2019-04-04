@@ -21,7 +21,6 @@ refreshProps(props) {
 }
 isAuth(){
     console.log('---------');
-    
     api.getWxAuth(window.location.href).then(res=>{
         console.log(res);
         if (res.code === 200) {

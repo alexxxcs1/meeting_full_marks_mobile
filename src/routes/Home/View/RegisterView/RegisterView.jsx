@@ -98,7 +98,9 @@ export class RegisterView extends Component {
       api.ApplyRegister(this.state.meetingid, this.state.formdata).then(res => {
          console.log(res);
          if (res.code === 200) {
-
+            if (res.result.is_toll === 1) {
+               window.location.hash = '#/home/pay/'+this.state.meetingid;
+            }
          }
          alert(res.message);
       }, err => {

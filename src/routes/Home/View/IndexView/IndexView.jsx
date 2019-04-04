@@ -82,7 +82,7 @@ render() {
                         我已报名
                     </div>
                     <div className={style.Tips}>
-                        参会报名点这里
+                        一步获取参会码
                     </div>
                 </div>
             </div>

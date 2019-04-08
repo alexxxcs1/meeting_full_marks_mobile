@@ -25,7 +25,6 @@ componentDidMount() {
   this.refreshProps(this.props);
 }
 refreshProps(props) {
-  window.location.search = '';
   let params = props.match.params;
   if (this.state.meetingid != params.id) {
     this.state.meetingid = params.id;
@@ -50,36 +49,37 @@ getMeetingPay(meetingid){
   })
 }
 goWxPay(meetingid){
-  api.getWxPayConfig(meetingid).then(res=>{
-    console.log(res);
-    if (res.code === 200) {
-        let self = this;
-        window.wx.chooseWXPay({
-          timestamp: res.result.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-          nonceStr: res.result.nonceStr, // 支付签名随机串，不长于 32 位
-          package: res.result.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
-          signType: res.result.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-          paySign: res.result.paySign, // 支付签名
-          success: function (res) {
-          // 支付成功后的回调函数
-            window.location.hash = '#/home/user/'+this.state.meetingid;
-          },
-          cancel:function(res) {
+  window.location.href = 'http://www.huibaifen.com/index.php/index/wxpay/index?meetid='+meetingid;
+  // api.getWxPayConfig(meetingid).then(res=>{
+  //   console.log(res);
+  //   if (res.code === 200) {
+  //       let self = this;
+  //       window.wx.chooseWXPay({
+  //         timestamp: res.result.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+  //         nonceStr: res.result.nonceStr, // 支付签名随机串，不长于 32 位
+  //         package: res.result.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+  //         signType: res.result.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+  //         paySign: res.result.paySign, // 支付签名
+  //         success: function (res) {
+  //         // 支付成功后的回调函数
+  //           window.location.hash = '#/home/user/'+this.state.meetingid;
+  //         },
+  //         cancel:function(res) {
             
-          },
-          fail:function(res) {
-              alert("支付失败");
-              console.log(res);
+  //         },
+  //         fail:function(res) {
+  //             alert("支付失败");
+  //             console.log(res);
               
-          }
-          });      
-    }else{
-      alert(res.message);
-    }
-  },err=>{
-    console.log(err);
+  //         }
+  //         });      
+  //   }else{
+  //     alert(res.message);
+  //   }
+  // },err=>{
+  //   console.log(err);
     
-  })
+  // })
 
 }
 render() {

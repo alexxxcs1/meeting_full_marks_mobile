@@ -36,7 +36,6 @@ refreshProps(props) {
 }
 getUserInfo(meetingid){
     api.getUserInfoIndex(meetingid).then(res=>{
-        console.log(res);
         if (res.code === 200) {
             this.state.username = res.result.username;
             this.state.meetingname = res.result.title;
@@ -45,7 +44,10 @@ getUserInfo(meetingid){
             this.state.userqr = res.result.erweima;
             this.setState(this.state);
         }else{
-            alert(res.message);
+            if (res.code === 40001) {
+                window.location.hash = '#/home/index/'+meetingid;
+                alert(res.message);
+            }
         }
     },err=>{
         console.log(err);
@@ -63,7 +65,7 @@ render() {
             </div>
             <div className={[style.ColumnBox,'childcenter childcontentend'].join(' ')}>
                 {
-                this.state.is_pay?
+                this.state.paystatus?
                 <div className={[style.PayStatusButton,'childcenter'].join(' ')}>已缴费</div>:
                 <div className={[style.PayStatusButton,'childcenter'].join(' ')} onClick={(()=>{window.location.hash='#/home/pay/'+this.state.meetingid}).bind(this)}>未缴费</div>
                 }
@@ -75,15 +77,19 @@ render() {
             <div className={[style.UserInfoDetail,'childcenter childcolumn'].join(' ')}>
                 <div className={[style.MeetingTitle,'childcenter'].join(' ')}>{this.state.meetingname==null?'':this.state.meetingname}</div>
                 <div className={[style.QRbox,'childcenter childcolumn'].join(' ')}>
+                    
+                    {this.state.paystatus?[
                     <div className={style.UserName}>
                         {this.state.username==null?'':this.state.username}
-                    </div>
+                    </div>,
                     <div className={style.UserQRCode}>
                         <img src={this.state.userqr==null?'':this.state.userqr} alt=""/>
-                    </div>
+                    </div>,
                     <div className={style.UserCode}>
                         识别码:{this.state.usercode==null?'':this.state.usercode}
-                    </div>
+                    </div>]:<div className={[style.Tips,'childcenter'].join(' ')}>
+                    您尚未缴费
+                    </div>}
                 </div>
                 <div className={[style.Tips,'childcenter'].join(' ')}>
                     向主办方出示该二维码用于会中服务

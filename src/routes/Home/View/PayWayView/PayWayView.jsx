@@ -100,7 +100,7 @@ render() {
             </div>:'',
             <div className={[style.SelfPayButton,'childcenter'].join(' ')} onClick={this.goWxPay.bind(this,this.state.meetingid)}>使用微信付款</div>,
             <div className={[style.OtherButton,'childcenter'].join(' ')} onClick={(()=>{this.setState({showOtherPay:true})}).bind(this)}>找他人代付</div>,
-            <div className={[style.OtherButton,'childcenter'].join(' ')}>暂不缴费下次再说</div>
+            <div className={[style.OtherButton,'childcenter'].join(' ')} onClick={()=>{window.location.hash='#/user/'+this.state.meetingid}}>暂不缴费下次再说</div>
             ]:
               <Redirect to={'/home/user/'+this.state.meetingid}/>
             }

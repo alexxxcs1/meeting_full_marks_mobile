@@ -238,11 +238,13 @@ class SelectOptionBox extends Component {
       return result;
    }
    HandleTouchStart(e) {
+      e.preventDefault();
       let touch = e.touches[0];
       TOUCHSTARTPOSTION = touch.pageY;
 
    }
    HandleTouchMove(e) {
+      e.preventDefault();
       let touch = e.touches[0];
       let direction = touch.pageY - TOUCHSTARTPOSTION;
       switch (true) {
@@ -269,6 +271,7 @@ class SelectOptionBox extends Component {
       this.setState(this.state);
    }
    HandleTouchEnd(e) {
+      e.preventDefault();
       TOUCHSTARTPOSTION = 0;
    }
    HandleDrop(boolean) {

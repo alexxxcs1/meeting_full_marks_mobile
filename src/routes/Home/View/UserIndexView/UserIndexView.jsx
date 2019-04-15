@@ -87,8 +87,8 @@ render() {
                     </div>,
                     <div className={style.UserCode}>
                         识别码:{this.state.usercode==null?'':this.state.usercode}
-                    </div>]:<div className={[style.Tips,'childcenter'].join(' ')}>
-                    您尚未缴费
+                    </div>]:<div className={[style.Tips,'childcenter'].join(' ')} onClick={(()=>{window.location.hash='#/home/pay/'+this.state.meetingid}).bind(this)}>
+                    您尚未缴费,去缴费
                     </div>}
                 </div>
                 <div className={[style.Tips,'childcenter'].join(' ')}>

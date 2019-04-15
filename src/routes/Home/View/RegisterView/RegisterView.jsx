@@ -142,6 +142,7 @@ class OrdinaryInputBox extends Component {
       };
       this.HandleInputValue = this.HandleInputValue.bind(this);
       this.refreshProps = this.refreshProps.bind(this);
+      this.onInputBlur = this.onInputBlur.bind(this);
    }
    componentDidMount() {
       this.refreshProps(this.props);
@@ -156,6 +157,11 @@ class OrdinaryInputBox extends Component {
    HandleInputValue(e) {
       this.props.onChange(e.target.value);
    }
+   onInputBlur() {
+      document.documentElement.scrollTop = 0;
+      window.pageYOffset = 0;
+      document.body.scrollTop = 0;
+   }
    render() {
       return (
          <div className={style.InputBox}>
@@ -163,7 +169,7 @@ class OrdinaryInputBox extends Component {
                <span>{this.props.name}</span>
             </div>
             <div className={style.InputBox} >
-               <input type="text" placeholder={this.props.placeholder} value={this.props.value} onChange={this.HandleInputValue} />
+               <input type="text" onBlur={this.onInputBlur} placeholder={this.props.placeholder} value={this.props.value} onChange={this.HandleInputValue} />
             </div>
          </div>
       )
@@ -186,6 +192,9 @@ class SelectOptionBox extends Component {
       this.HandleTouchMove = this.HandleTouchMove.bind(this);
       this.HandleTouchEnd = this.HandleTouchEnd.bind(this);
       this.HandleSelect = this.HandleSelect.bind(this);
+      this.onInputBlur = this.onInputBlur.bind(this);
+      this.createOption_Option = this.createOption_Option.bind(this);
+      this.onSelectChange = this.onSelectChange.bind(this);
    }
    componentDidMount() {
       this.refreshProps(this.props);
@@ -198,6 +207,11 @@ class SelectOptionBox extends Component {
       this.state.SelectIndex = props.Selected ? props.Selected : this.state.SelectIndex;
       this.state.SelectValue = props.Selected ? props.Selected : this.state.SelectValue;
       this.setState(this.state);
+   }
+   onInputBlur() {
+      document.documentElement.scrollTop = 0;
+      window.pageYOffset = 0;
+      document.body.scrollTop = 0;
    }
    HandleSelect() {
       this.state.SelectValue = this.state.SelectIndex;
@@ -278,6 +292,17 @@ class SelectOptionBox extends Component {
       this.state.Drop = boolean;
       this.setState(this.state);
    }
+   createOption_Option(){
+      let result = [];
+      for (let z = 0; z < this.state.Option.length; z++) {
+         let Option = this.state.Option[z]; 
+         result.push(<option value={Option.key} >{Option.value}</option>)
+      }
+      return result;
+   }
+   onSelectChange(e){
+      this.props.onChange(e.target.value)
+   }
    render() {
       return (
          <div className={style.InputBox}>
@@ -286,9 +311,13 @@ class SelectOptionBox extends Component {
             </div>
             <div className={style.SelectedOptionBox} >
                <div className={[style.SelectedValue, 'childcenter childcontentstart'].join(' ')} onClick={this.HandleDrop.bind(this, true)}>
-                  {this.state.SelectValue != null ? this.state.Option[this.state.SelectValue].value : <span className={style.PlaceHolder}>{this.props.placeholder}</span>}
+                  {/* {this.state.SelectValue != null ? this.state.Option[this.state.SelectValue].value : <span className={style.PlaceHolder}>{this.props.placeholder}</span>} */}
+                  <select name="" className={style.SelectComponent} value={null} onChange={this.onSelectChange} onBlur={this.onInputBlur}>
+                     <option value={null}  style={{display:'none'}}></option>
+                     {this.createOption_Option()}
+                  </select>
                </div>
-               {this.state.Option.length !== 0 && this.state.Drop ? <div className={style.DropBox}>
+               {/* {this.state.Option.length !== 0 && this.state.Drop ? <div className={style.DropBox}>
                   <div className={style.DropOption}>
                      <div className={[style.HandleButtonGroup, 'childcenter'].join(' ')}>
                         <div className={[style.ButtonBox, 'childcenter childcontentstart'].join(' ')}>
@@ -305,7 +334,7 @@ class SelectOptionBox extends Component {
                         {this.createOption()}
                      </div>
                   </div>
-               </div> : ''}
+               </div> : ''} */}
             </div>
          </div>
       )

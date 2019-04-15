@@ -110,7 +110,7 @@ render() {
                 </div>
                 <div className={[style.InputBox,'childcenter'].join(' ')} >
                     <div className={style.PhoneCodeInput}>
-                        <input type="text" placeholder={this.props.placeholder} value={this.props.code} onChange={this.HandleInputValue.bind(this,'code')} />
+                        <input type="text" maxLength='6' placeholder={this.props.placeholder} value={this.props.code} onChange={this.HandleInputValue.bind(this,'code')} />
                     </div>
                     <div className={[style.getCodeButton,this.state.getcodecd == 60?'':style.onCoutdown,'childcenter'].join(' ')} onClick={this.state.getcodecd == 60?this.HandleGetCode:()=>{}}>{this.state.getcodecd == 60?'获取验证码':this.state.getcodecd + 's'}</div>
                 </div>

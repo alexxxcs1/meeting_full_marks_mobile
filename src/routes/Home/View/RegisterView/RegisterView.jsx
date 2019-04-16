@@ -296,7 +296,7 @@ class SelectOptionBox extends Component {
       let result = [];
       for (let z = 0; z < this.state.Option.length; z++) {
          let Option = this.state.Option[z]; 
-         result.push(<option value={Option.key} >{Option.value}</option>)
+         result.push(<option value={Option.value} >{Option.value}</option>)
       }
       return result;
    }

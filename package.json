@@ -98,5 +98,12 @@
     "node-sass": "^4.9.0",
     "postcss-pxtorem": "^4.0.1",
     "sass-loader": "^7.0.3"
+  },
+  "proxy": {
+    "/huibaifen/": {
+      "target": "http://192.168.1.153/",
+      "secure": false,
+      "changeOrigin": true
+    }
   }
 }

@@ -18,6 +18,7 @@ constructor(props) {
      this.HandleInputValue = this.HandleInputValue.bind(this);
      this.HandleGetCode = this.HandleGetCode.bind(this);
      this.SubmitBind = this.SubmitBind.bind(this);
+     this.onInputBlur = this.onInputBlur.bind(this);
 }
 componentWillReceiveProps(nextprops) {
   this.refreshProps(nextprops);
@@ -57,6 +58,8 @@ HandleGetCode(){
                     clearInterval(getcodeInterval);
                 }
             }, 1000);
+        }else{
+            alert(res.message)
         }
         this.state.onAjax = false;
         this.setState(this.state);
@@ -74,7 +77,7 @@ SubmitBind(){
     api.BindWechat(this.state.meetingid,this.state.phone,this.state.code).then(res=>{
         console.log(res);
         if (res.code === 200) {
-            window.location.hash = '#/user/' + this.state.meetingid
+            window.location.hash = '#/home/user/' + this.state.meetingid
         }
         alert(res.message);
     },err=>{
@@ -84,6 +87,11 @@ SubmitBind(){
 }
 componentWillUnmount(){
     clearInterval(getcodeInterval);
+}
+onInputBlur() {
+    document.documentElement.scrollTop = 0;
+    window.pageYOffset = 0;
+    document.body.scrollTop = 0;
 }
 render() {
   return (
@@ -101,7 +109,7 @@ render() {
                     <span>手机号码</span>
                 </div>
                 <div className={style.InputBox} >
-                    <input type="text" placeholder={this.props.placeholder} value={this.props.phone} onChange={this.HandleInputValue.bind(this,'phone')} />
+                    <input onBlur={this.onInputBlur} type="text" placeholder={this.props.placeholder} value={this.props.phone} onChange={this.HandleInputValue.bind(this,'phone')} />
                 </div>
             </div>
             <div className={style.InputBox}>
@@ -110,14 +118,14 @@ render() {
                 </div>
                 <div className={[style.InputBox,'childcenter'].join(' ')} >
                     <div className={style.PhoneCodeInput}>
-                        <input type="text" maxLength='6' placeholder={this.props.placeholder} value={this.props.code} onChange={this.HandleInputValue.bind(this,'code')} />
+                        <input onBlur={this.onInputBlur} type="text" maxLength='6' placeholder={this.props.placeholder} value={this.props.code} onChange={this.HandleInputValue.bind(this,'code')} />
                     </div>
                     <div className={[style.getCodeButton,this.state.getcodecd == 60?'':style.onCoutdown,'childcenter'].join(' ')} onClick={this.state.getcodecd == 60?this.HandleGetCode:()=>{}}>{this.state.getcodecd == 60?'获取验证码':this.state.getcodecd + 's'}</div>
                 </div>
             </div>
         </div>
         <div className={[style.HandleUpdate,'childcenter'].join(' ')}>
-            <div className={[style.CancelButton,'childcenter'].join(' ')} onClick={(()=>{window.history.back()}).bind(this)}>
+            <div className={[style.CancelButton,'childcenter'].join(' ')} onClick={(()=>{window.location.hash='#/home/index/'+this.state.meetingid;})}>
                 返回
             </div>
             <div className={[style.ConfirmButton,'childcenter'].join(' ')} onClick={this.SubmitBind}>

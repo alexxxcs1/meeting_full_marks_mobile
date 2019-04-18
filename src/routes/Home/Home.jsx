@@ -51,7 +51,7 @@ export class Home extends Component {
 
           </Switch>
         </div>
-        <div className={[style.BotNav,'childcenter'].join(' ')}>
+        {/* <div className={[style.BotNav,'childcenter'].join(' ')}>
 
           <div className={[style.IconBox,'childcenter childcolumn'].join(' ')} onClick={()=>{window.location.hash='#/home/index/'+this.state.meetingid}}>
             <div className={style.IconImage}>
@@ -78,7 +78,7 @@ export class Home extends Component {
             </div>
           </div>
 
-        </div>
+        </div> */}
       </div>
     )
   }

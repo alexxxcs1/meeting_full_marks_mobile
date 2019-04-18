@@ -60,29 +60,29 @@ render() {
             
         </div>
         {this.state.meetinginfo?<div className={[style.HandleGroup,'childcenter childcolumn'].join(' ')}>
-            <div className={[style.ButtonBox,'childcenter'].join(' ')} onClick={()=>{window.location.hash = '#/home/register/'+this.state.meetinginfo.id}}>
+            <div className={[style.ButtonBox,'childcenter'].join(' ')} onClick={()=>{window.location.hash = '#/home/bindwx/'+this.state.meetinginfo.id}}>
                 <div className={[style.IconBox,style.purple,'childcenter'].join(' ')} >
                     <img src={signupicon} alt=""/>
                 </div>
                 <div style={{'--themecolor':'#604494'}} className={[style.ButtonValueBox,'childcenter childcolumn childalignstart'].join(' ')}>
                     <div className={style.Value}>
-                        我要报名
+                        我的
                     </div>
                     <div className={style.Tips}>
                         参会报名点这里
                     </div>
                 </div>
             </div>
-            <div className={[style.ButtonBox,'childcenter'].join(' ')} onClick={()=>{window.location.hash = '#/home/bindwx/'+this.state.meetinginfo.id}}>
+            <div className={[style.ButtonBox,'childcenter'].join(' ')} onClick={()=>{window.location.hash = '#/home/meeting/'+this.state.meetinginfo.id}}>
                 <div className={[style.IconBox,style.blue,'childcenter'].join(' ')}>
                     <img src={qricon} alt=""/>
                 </div>
                 <div style={{'--themecolor':'#006FCE'}} className={[style.ButtonValueBox,'childcenter childcolumn childalignstart'].join(' ')}>
                     <div className={style.Value}>
-                        我已报名
+                        大会信息
                     </div>
                     <div className={style.Tips}>
-                        一步获取参会码
+                        大会精彩信息，尽在一手掌握
                     </div>
                 </div>
             </div>

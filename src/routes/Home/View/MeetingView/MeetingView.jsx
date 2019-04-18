@@ -124,16 +124,26 @@ class MeetingIntroduce extends Component{
         super(props);
         this.state={};
         this.refreshProps = this.refreshProps.bind(this);
+        this.onWindowReturn = this.onWindowReturn.bind(this);
     }
     componentDidMount(){
         this.refreshProps(this.props);
+        window.history.pushState(null, null, document.URL);
+        window.addEventListener('popstate',this.onWindowReturn);
     }
     componentWillReceiveProps(nextprops){
         this.refreshProps(nextprops);
     }
+    componentWillUnmount(){
+        window.removeEventListener('popstate',this.onWindowReturn);
+    }
     refreshProps(props){
         this.state.content = props.content;
         this.setState(this.state);
+    }
+    onWindowReturn(){
+        this.props.return();
+        window.history.pushState(null, null, document.URL);
     }
     render(){
         return (

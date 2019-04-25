@@ -73,6 +73,13 @@ const AskPost = (ajaxinstance) => {
         meetid
       }));
     }
+    //判断是否注册
+    customer.getIsApply = (meetid) => {
+      return ajaxinstance.post('index/users/is_apply',qs.stringify({
+        meetid
+      }));
+    }
+    
     
     
     

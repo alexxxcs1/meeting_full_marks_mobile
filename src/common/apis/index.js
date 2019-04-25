@@ -3,7 +3,7 @@ import axios from 'axios'
 import AskPost from './AskPost'
 
 let cm = '/huibaifen/public/index.php/'
-let ol = 'http://www.huibaifen.com/index.php/'
+let ol = 'http://portal.huibaifen.com/index.php/'
 
 let host;
 

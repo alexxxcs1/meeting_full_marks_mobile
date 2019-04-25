@@ -78,8 +78,12 @@ SubmitBind(){
         console.log(res);
         if (res.code === 200) {
             window.location.hash = '#/home/user/' + this.state.meetingid
+        }else if(res.code === 40002){
+            window.location.hash = '#/home/register/' + this.state.meetingid
+        }else{
+            alert(res.message);
         }
-        alert(res.message);
+        
     },err=>{
         console.log(err);
         

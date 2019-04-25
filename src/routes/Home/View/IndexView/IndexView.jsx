@@ -11,6 +11,7 @@ constructor(props) {
   this.state = {
     meetingid:null,
     meetinginfo:null,
+    isRegister:false,
   };
   this.refreshProps = this.refreshProps.bind(this);
   this.getIndexInfo = this.getIndexInfo.bind(this);
@@ -27,6 +28,8 @@ refreshProps(props) {
       this.state.meetingid = params.id;
       this.setState(this.state);
       this.getIndexInfo(params.id);
+      this.getIsApply(params.id);
+      
     }
 }
 getIndexInfo(id){
@@ -38,7 +41,18 @@ getIndexInfo(id){
         }
     },err=>{
         console.log(err);
-        
+    })
+}
+getIsApply(id){
+    api.getIsApply(id).then(res=>{
+        if (res.code === 200) {
+            this.state.isRegister = true;
+        }else{
+            this.state.isRegister = false;
+        }
+        this.setState(this.state);
+    },err=>{
+        console.log(err);
     })
 }
 render() {
@@ -55,12 +69,12 @@ render() {
             </div>
             <div className={[style.MeetingDetail,'childcenter childcontentstart'].join(' ')}>
                 <span>{this.state.meetinginfo?this.state.meetinginfo.address:'加载中...'}</span>
-                <div className={style.GoDetailButton}></div>
+                <div className={style.GoDetailButton} onClick={()=>{window.location.hash = '#/home/meeting/'+this.state.meetinginfo.id}}></div>
             </div>
             
         </div>
         {this.state.meetinginfo?<div className={[style.HandleGroup,'childcenter childcolumn'].join(' ')}>
-            <div className={[style.ButtonBox,'childcenter'].join(' ')} onClick={()=>{window.location.hash = '#/home/bindwx/'+this.state.meetinginfo.id}}>
+            <div className={[style.ButtonBox,'childcenter'].join(' ')} onClick={()=>{window.location.hash = this.state.isRegister?'#/home/user/'+this.state.meetinginfo.id:'#/home/bindwx/'+this.state.meetinginfo.id}}>
                 <div className={[style.IconBox,style.purple,'childcenter'].join(' ')} >
                     <img src={signupicon} alt=""/>
                 </div>
